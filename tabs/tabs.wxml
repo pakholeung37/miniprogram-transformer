@@ -1,0 +1,57 @@
+
+<template name="jz-tab">
+  <view class="jz-tab">
+      <block wx:if="{{tab.scroll && tab.list.length > 3}}">
+        <scroll-view
+          class="jz-tab-content jz-tab-content-scroll"
+          scroll-x="true"
+          style="height: {{tab.height ? tab.height + 'rpx' : 'auto'}};"
+        >
+          <template is="jz-tab-item" data="{{ tab, componentId }}"></template>
+        </scroll-view>
+      </block>
+      <block wx:else>
+        <view
+          class="jz-tab-content"
+          style="height: {{tab.height ? tab.height + 'rpx' : 'auto'}};"
+        >
+          <template is="jz-tab-item" data="{{ tab, componentId }}"></template>
+        </view>
+      </block>
+  </view>
+</template>
+
+<template name="jz-tab-item">
+  <view
+    wx:for="{{tab.list}}"
+    wx:key="id"
+    class="jz-tab-item {{tab.selectedId == item.id ? tab.selectedCls + ' jz-tab-selected-item jz-color' : ''}}"
+    data-component-id="{{componentId}}"
+    data-item-id="{{item.id}}"
+    style="width: {{tab.list.length > 3 ? '33.333%':'auto'}}"
+    bindtap="_handleTabChange"
+  >
+    <view
+      class="jz-tab-title jz-border-color "
+      style="line-height: {{tab.height ? tab.height-3 + 'rpx' : 'auto'}};{{tab.selectedId == item.id&&tab.border?'border-bottom-width:4rpx;border-bottom-style:solid;color:#353535;':''}} {{item.openSort?'position: relative;':''}}"
+    >
+      {{item.title}}
+
+      <view wx:if="{{item.openSort}}" class='sortBtn'>
+        <view class="icon-arrow triangle-up {{tab.selectedId == item.id?(!item.isDesc?'jz-color':''):''}}"></view>
+        <view class="icon-arrow triangle-down {{tab.selectedId == item.id?(item.isDesc?'jz-color':''):''}}"></view>
+      </view> 
+
+      <view class="openSelect icon-filter {{tab.selectedId == item.id?'jz-border-color':''}}" wx:if="{{item.openSelect}}">
+        
+      </view>
+
+      
+      <view wx:if="{{tab.useCusBorder&&tab.selectedId == item.id}}" class="cus-border jz-background-color" 
+        style="bottom:{{tab.cusBorder&&tab.cusBorder.bottom ? tab.cusBorder.bottom+'rpx': '0'}}; width:{{tab.cusBorder&&tab.cusBorder.width ? tab.cusBorder.width+'rpx': '50rpx'}}; height:{{tab.cusBorder&&tab.cusBorder.height ? tab.cusBorder.height+'rpx': '6rpx'}};"
+      >
+      </view>
+
+    </view>
+  </view>
+</template>
