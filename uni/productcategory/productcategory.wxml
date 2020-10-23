@@ -1,0 +1,32 @@
+<include src="/modules/modules.wxml"/>
+<include src="/components/components.wxml"/>
+
+<view class="container jz-theme{{themeId}} jz-bg-grey">
+  <view class='jz-separator'></view>
+
+  <block wx:for="{{moduleList}}" wx:for-item="module" wx:key='id' wx:for-index='moduleIndex'>
+     <view class="jz-pdFilter jz-module {{module.pattern.ft ? 'menuFixed': ''}}" wx:if="{{ module.style == 13}}">
+      <template is="pdFilter" data="{{module}}"></template>
+    </view>  
+    <view class="jz-product-category jz-module {{module.isPdFilterFixTop ? 'navisfix': ''}}" wx:if="{{ module.style == 6 && module.isDisplay }}">
+      <template is="productCategory" data="{{themeId,module,_currencyVal,moduleIndex,colType,pageContentHeight, isModel,showPdPanel,pinfo,otherData,propList,pdPanelData,defaultData,quantity,panelImg,isOpenAmount,mallOpen,buyBtnClass,saleProductIdList,isFinishLoadSalePdIdList,isJoinOtherGroup,isSelectedItem,setDataParam,isSelected,selectedOptionsStr,panelImg,isBanItem,isHideItem,pdPanelSource,isImme, menuFixed,isTabBarPath,isIpx, productGroupList}}"></template>
+
+      <view class="categoryPanel categoryPanel{{module.content.s}} {{menuFixed ? 'fixed': ''}}" style="{{showCategoryListPanel ? 'display:block' : 'display:none'}}"> 
+        <view class='text'>全部分类</view>
+        <view wx:if="{{module.content.s != 3}}" class='pdPanelArrow icon-arrow' catchtap="tapToHidePanel"></view>
+        <view class="tag {{index==selectIndex?'selected jz-border-color jz-color':''}}" wx:for='{{categoryList}}' wx:key='ci' data-groupindex='{{index}}' data-moduleindex='{{moduleIndex}}' data-groupid='{{item.ci}}' catchtap='selectCategory'>{{item.cn}}</view>
+      </view>  
+
+    </view>
+  </block>
+
+  <view class="maskForPC" style="{{showCategoryListPanel ? 'display:block' : ''}}" catchtap="tapToHidePanel"></view>
+
+  <!-- toast -->
+  <template is="jz-toast" data="{{jzToast}}"></template>
+
+  <!-- 底部 -->
+  <template is="footer" data="{{..._footer}}"></template>
+
+  <template is="tabbar" data="{{tabBar,isTabBarPath,mallCartNum,_tabBarArgs}}"/>  
+</view>

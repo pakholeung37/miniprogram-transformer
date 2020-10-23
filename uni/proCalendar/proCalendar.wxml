@@ -1,0 +1,70 @@
+<wxs src="../../utils/comm.wxs" module="util" />
+
+<view class='proCalendar'>
+  <view class='yearAndMonthBox'>
+    <view class='mountLeft icon-arrow {{currentYear==nowYear && currentMonth==nowMonth ? "grey" : ""}}' catchtap='toLastMonth'></view>
+    <view class='txt'>{{currentYear}}年{{currentMonth}}月</view>
+    <view class='mountRight icon-arrow {{currentYear==nowYear+1 && currentMonth==nowMonth ? "grey" : ""}}' catchtap='toNextMonth'></view>
+  </view>
+  <view class='weekBox'>
+    <view class='weekItem'>日</view>
+    <view class='weekItem'>一</view>
+    <view class='weekItem'>二</view>
+    <view class='weekItem'>三</view>
+    <view class='weekItem'>四</view>
+    <view class='weekItem'>五</view>
+    <view class='weekItem'>六</view>
+  </view>
+  <view class='dateBox'>
+    <view 
+      class='dateItem {{item.disabled ? "dateItem_grey" : ""}} {{computed.selectedStyle(item, currentYear, currentMonth, selectYear, selectMonth, selectDay, selectStart, selectEnd, multiSelect)}} {{isOpenAmount ? "" : "height100"}}' 
+      wx:for="{{dateArr}}" 
+      wx:key="{{item.key}}" 
+      catchtap='handleClickDate' 
+      data-date='{{item.dateNum}}' 
+      data-disabled='{{item.disabled}}'>
+      <block wx:if="{{item.dateNum > 0}}">
+        <view class='dateStr' wx:if="{{item.dateNum > 0}}">{{item.dateNum}}</view>
+        <view class='price jz-color' wx:if="{{item.price !== '' && item.price != null}}">
+          {{currencyVal}}{{item.price}}
+        </view>
+        <view class='amount' wx:if="{{isOpenAmount && item.amount != null && item.amount !== ''}}">
+          余{{item.amount}}
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<!-- 返回真正的选择样式, 调和多选范围和单选 -->
+<wxs module="computed">
+var util = require("../../utils/comm.wxs")
+function selectedStyle(item, currentYear, currentMonth, selectYear, selectMonth, selectDay, selectStart, selectEnd, multiSelect) {
+  var date = item.dateNum;
+  var style = "";
+  if (!multiSelect) {
+    if(selectYear === currentYear && selectMonth === currentMonth && selectDay === date) {
+      return style + "selected jz-background-color"
+    }
+  } else {
+    if(selectStart.year === currentYear && selectStart.month === currentMonth && selectStart.date === date) {
+      return style + "selected jz-background-color"
+    }
+    if(selectEnd.year === currentYear && selectEnd.month === currentMonth && selectEnd.date === date) {
+      return style + "selected jz-background-color"
+    }
+    if(!item.disabled && item.dateNum > 0 && util.isADate(selectStart) && util.isADate(selectEnd)) {
+      var date = {
+        year: currentYear,
+        month: currentMonth,
+        date: date,
+      }
+      if(util.dateGreaterThan(date, selectStart) && util.dateGreaterThan(selectEnd, date)) {
+        return style + "selected jz-background-color"
+      }
+    }
+  }
+}
+module.exports = {
+  selectedStyle: selectedStyle
+}
+</wxs>
