@@ -9,7 +9,6 @@ module.exports = function transformer(file, api, options) {
   var j = api.jscodeshift
   var root = j(file.source)
   var config = util.getTransformConfig(options)
-
   //
   // Handle import hoisting
   //

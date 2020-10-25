@@ -3727,6 +3727,11 @@ merge-stream@^2.0.0:
   resolved "https://registry.npm.taobao.org/merge-stream/download/merge-stream-2.0.0.tgz?cache=0&sync_timestamp=1589682763068&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmerge-stream%2Fdownload%2Fmerge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
   integrity sha1-UoI2KaFN0AyXcPtq1H3GMQ8sH2A=
 
+merge@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npm.taobao.org/merge/download/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
+  integrity sha1-OL6/gMMiCopIe2/Ps5QbsRcgwUU=
+
 micromatch@^2.3.7:
   version "2.3.11"
   resolved "https://registry.npm.taobao.org/micromatch/download/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
@@ -4410,7 +4415,7 @@ recast@^0.11.0, recast@^0.11.17:
     private "~0.1.5"
     source-map "~0.5.0"
 
-recast@^0.20.3:
+recast@^0.20.3, recast@^0.20.4:
   version "0.20.4"
   resolved "https://registry.npm.taobao.org/recast/download/recast-0.20.4.tgz#db55983eac70c46b3fff96c8e467d65ffb4a7abc"
   integrity sha1-21WYPqxwxGs//5bI5GfWX/tKerw=

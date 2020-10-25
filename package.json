@@ -29,15 +29,22 @@
     "build:watch": "tsc -w -p tsconfig.release.json",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "transform": "node ./build/src/main.js"
   },
   "author": "Jakub Synowiec <github@jakubsynowiec.info>",
   "license": "Apache-2.0",
   "dependencies": {
+    "@babel/generator": "^7.12.1",
+    "@babel/parser": "^7.12.3",
+    "@babel/traverse": "^7.12.1",
+    "@babel/types": "^7.12.1",
     "graceful-fs": "^4.2.4",
     "jscodeshift": "^0.11.0",
     "jscodeshift-imports": "^1.1.0",
+    "merge": "^1.2.1",
     "posthtml": "^0.13.4",
+    "recast": "^0.20.4",
     "tslib": "~2.0.1"
   },
   "volta": {
