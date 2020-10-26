@@ -3,7 +3,7 @@ import * as noVars from "./no-vars"
 import * as cjs from "./cjs"
 import * as exports_ from "./exports"
 import * as importCleanup from "./import-cleanup"
-import toVueComponent from "./to-vue-component"
+import toVueComponent from "./plugins/to-vue-component"
 
 const transforms = [cjs, exports_, importCleanup, noVars, toVueComponent]
 // try to run all transforms

@@ -1,23 +1,14 @@
 import { Transform } from "jscodeshift"
+import traverse from "@babel/traverse"
+import wxToUni from "./plugins/wx-to-uni"
 import { parse, print } from "../utils/parser"
-import traverse, { NodePath } from "@babel/traverse"
-import * as t from "@babel/types"
-
-const transform: Transform = (fileInfo, api) => {
-  const j = api.jscodeshift
+import * as types from "@babel/types"
+import { babelPluginMerge } from "../utils/babel-util"
+const plugins = babelPluginMerge(...[wxToUni].map(p => p({ types })))
+const transform: Transform = fileInfo => {
   const source = fileInfo.source
   const ast = parse(source)
-
-  traverse(ast, {
-    CallExpression(path) {
-      if (
-        (path.node.callee as t.Identifier).name == "Component" ||
-        (path.node.callee as t.Identifier).name == "Page"
-      ) {
-        path.replaceWith(t.exportDefaultDeclaration(path.node.arguments[0]))
-      }
-    },
-  })
+  traverse(ast, plugins.visitor)
   const { code } = print(ast)
   return code
 }
