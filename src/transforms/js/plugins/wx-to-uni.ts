@@ -1,5 +1,3 @@
-import { PluginObj } from "@babel/core"
-import { Node } from "@babel/types"
 import { BabelPlugin } from "../../utils/babel-util"
 
 const plugin: BabelPlugin = () => {
