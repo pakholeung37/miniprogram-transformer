@@ -1,8 +1,8 @@
 import { Transform } from "jscodeshift"
-import * as noVars from "./no-vars"
-import * as cjs from "./cjs"
-import * as exports_ from "./exports"
-import * as importCleanup from "./import-cleanup"
+import * as noVars from "./codeshift/no-vars"
+import * as cjs from "./codeshift/cjs"
+import * as exports_ from "./codeshift/exports"
+import * as importCleanup from "./codeshift/import-cleanup"
 import toVueComponent from "./plugins/resolve-component"
 
 const transforms = [cjs, exports_, importCleanup, noVars, toVueComponent]

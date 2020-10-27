@@ -1,5 +1,5 @@
 import { PluginObj, Visitor } from "@babel/core"
-import { VisitNodeObject, Node, TraverseOptions } from "@babel/traverse"
+import { Node, TraverseOptions } from "@babel/traverse"
 import * as t from "@babel/types"
 
 export interface BabelPlugin {

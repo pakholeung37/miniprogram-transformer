@@ -3,7 +3,7 @@
  */
 
 var sortBy = require("lodash/sortBy")
-var util = require("../utils/main")
+var util = require("../../utils/main")
 
 module.exports = function transformer(file, api, options) {
   var j = api.jscodeshift

@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es6",
+    "lib": ["esnext"],
     "module": "commonjs",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
@@ -18,11 +19,6 @@
     "noImplicitThis": false,
     "skipLibCheck": true
   },
-  "include": [
-    "src/**/*",
-
-  ],
-  "exclude": [
-    "**/__tests__/**/*"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["**/__tests__/**/*"]
 }

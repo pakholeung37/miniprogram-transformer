@@ -9,9 +9,8 @@ const plugin: BabelPlugin = ({ types: t }) => {
             path.node.callee.name == "Component") ||
           (t.isIdentifier(path.node.callee) && path.node.callee.name == "Page")
         ) {
-          path.parentPath.replaceWith(
-            t.exportDefaultDeclaration(path.node.arguments[0] as any),
-          )
+          const ast = path.node.arguments[0]
+          path.parentPath.replaceWith(t.exportDefaultDeclaration(ast as any))
         }
       },
     },
