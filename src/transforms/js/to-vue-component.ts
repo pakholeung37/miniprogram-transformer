@@ -1,21 +1,14 @@
 import { Transform } from "jscodeshift"
-import traverse from "@babel/traverse"
+import { transform } from "@babel/core"
 import wxToUni from "./plugins/wx-to-uni"
-import { parse, print } from "../utils/parser"
-import * as types from "@babel/types"
-import { babelPluginMerge } from "../utils/babel-util"
 import resolveComponent from "./plugins/resolve-component"
 
-const plugins = babelPluginMerge(
-  ...[wxToUni, resolveComponent].map(p => p({ types })),
-)
-
-const transform: Transform = fileInfo => {
+const t: Transform = fileInfo => {
   const source = fileInfo.source
-  const ast = parse(source)
-  traverse(ast, plugins.visitor)
-  const { code } = print(ast)
+  const { code } = transform(source, {
+    plugins: [wxToUni, resolveComponent]
+  })
   return code
 }
 
-export default transform
+export default t
